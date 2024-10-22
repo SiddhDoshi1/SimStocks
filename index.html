@@ -198,12 +198,10 @@
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       const analytics = getAnalytics(app);
-      console.log(app);
       
       //
       document.getElementById("balance_temp").addEventListener("click", function(event) {
       //event.preventDefault();
-      //console.log(1);
       // stock name : [price,quantity]
       var user = sessionStorage.getItem("Username");
       var stock_fetch1 = document.getElementById("stock_company").textContent;  
@@ -212,10 +210,8 @@
       quantity=parseInt(quantity);
       calcprice = calcprice.substring(2, calcprice.length);
       calcprice = parseFloat(calcprice);
-      //console.log(stock_fetch1);
-      //console.log(user);
+
       user = user.substring(1, user.length - 1);
-      //console.log(stock_fetch2);
       
       const dbRef = ref(getDatabase());
       var stock,balance,currquantity,currprice;
@@ -223,13 +219,11 @@
       .then((snapshot) => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
-          console.log(userData);
           stock = userData[stock_fetch1];
           balance = userData["balance"];
         }
       }).then(() => {
       balance-=calcprice;
-      console.log(balance);
       if(typeof stock === "undefined")
       {
         calcprice/=quantity;  
@@ -247,13 +241,10 @@
         .then((snapshot) => {
           if (snapshot.exists()) {
             const userData = snapshot.val();
-            console.log(userData);
             currquantity = userData["quantity"];
             currprice = userData["calcprice"];
           }}).then(() => {
               quantity=quantity+currquantity;
-              console.log(calcprice);
-              console.log(currprice*currquantity);
               calcprice=(currprice*currquantity+calcprice)/quantity;
               const db=getDatabase();
               const reference = ref(db,'users/' + user);
@@ -275,18 +266,15 @@
       .then((snapshot) => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
-          console.log(userData);
           balance = userData["balance"];
         }
       }).then(() => {
-        console.log(balance);
         document.getElementById("balance_temp").textContent=balance;
       })
     })
 
     //
     document.getElementById("firebase_quantity_check").addEventListener("click", function(event) {
-      //console.log(1);
       var user = sessionStorage.getItem("Username");
       var company = document.getElementById("stock_company").textContent;
       user = user.substring(1, user.length - 1);
@@ -296,7 +284,6 @@
       .then((snapshot) => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
-          console.log(userData);
           quantity = userData["quantity"];
         }
         else
@@ -315,7 +302,6 @@
       var calcprice =document.getElementById("sell_calcprice").textContent;
       calcprice = calcprice.substring(2, calcprice.length);
       calcprice = parseFloat(calcprice);
-      console.log(calcprice);
       user = user.substring(1, user.length - 1);
       const dbRef = ref(getDatabase());
       var currquantity;      
@@ -323,7 +309,6 @@
       .then((snapshot) => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
-          console.log(userData);
           currquantity = userData["quantity"];
         }
       }).then(()=>{
@@ -340,12 +325,9 @@
         .then((snapshot) => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
-          console.log(userData);
           currbalance = userData["balance"];
         }
       }).then(()=>{
-        console.log(currbalance);
-        console.log(calcprice);
         currbalance+=calcprice;
         const db=getDatabase();
         const reference = ref(db,'users/' + user);

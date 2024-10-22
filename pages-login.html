@@ -202,7 +202,6 @@
         .getElementById("logIn")
         .addEventListener("click", function (event) {
           event.preventDefault();
-          console.log(1);
           var name = document.getElementById("yourName").value;
           var password = document.getElementById("UserPasswordlogin").value;
           const dbRef = ref(getDatabase());
@@ -211,29 +210,23 @@
             .then((snapshot) => {
               if (snapshot.exists()) {
                 const userData = snapshot.val();
-                console.log(userData);
                 email = userData["email"];
               } else {
                 alert("Username do not exist");
               }
             })
             .then(() => {
-              console.log(email);
               sessionStorage.clear();
               signInWithEmailAndPassword(auth, email, password).then(
                 (userCredential) => {
-                  console.log(1);
                   // Signed in
                   const user = userCredential.user;
-                  console.log(user);
                   const dbRef = ref(getDatabase());
                   get(child(dbRef, "users/" + name + "/"))
                     .then((snapshot) => {
                       if (snapshot.exists()) {
                         const userData = snapshot.val();
-                        console.log(userData[name]);
                         const balance=JSON.stringify(userData.balance);
-                        console.log(balance);
                         const Username = JSON.stringify(userData.username);
                         sessionStorage.setItem("Username", Username);
                         const userDataString = JSON.stringify(userData);
@@ -252,19 +245,10 @@
                     });
                 }
               );
-              //var storedUsername = sessionStorage.setItem("username",user)
-              // sessionStorage.setItem('user', true)
-              // setEmail(email);
-              // setPassword(password);
-              // router.push('index.html');
-              //res.render("index.html");
-              //document.getElementById("logout").style.display = "block";
-              // ...
             })
             .catch((error) => {
               const errorCode = error.code;
               const errorMessage = error.message;
-              console.log(errorMessage);
               alert(errorMessage);
             });
         });

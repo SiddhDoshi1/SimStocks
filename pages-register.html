@@ -224,7 +224,6 @@
         if (snapshot.exists()) {
           flag=false;
           alert("Username already exists!!");
-          console.log(snapshot.val());
         } else {
           createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
@@ -235,27 +234,18 @@
               email : email,
               balance : 10000,
             });
-            console.log(user);
             alert("Registration successfully!!");
+            window.location.href = "pages-login.html"; 
           })
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorMessage);
-            alert(error);
+            console.error(errorMessage);
           });
-          //console.log("No data available");
         }
       }).catch((error) => {
         console.error(error);
       });
-      console.log(flag);  
-        if(flag)
-        {
-          console.log(1);
-          //For new registration
-          
-        }
       });
     </script>
   </body>

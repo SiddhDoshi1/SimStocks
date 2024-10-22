@@ -180,7 +180,6 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-    console.log(app);
     // Firebase database reference
     const database = getDatabase(app);
     
@@ -193,10 +192,7 @@ function displayStockDetails() {
   var user = sessionStorage.getItem("Username");
   onValue(stockDetailsRef, (snapshot) => {
     const stockData = snapshot.val();
-    console.log(stockData);
     user = user.substring(1, user.length - 1);
-    console.log(user);
-    console.log(stockData["users"][user]);
     document.getElementById("username_val").textContent = user;
     document.getElementById("invested").textContent = `$ ${(stockData["users"][user]["balance"]).toFixed(2)}`;
 
