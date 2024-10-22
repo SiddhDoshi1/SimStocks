@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Retrieve data from session storage
   const userDataString = sessionStorage.getItem("UserCredential");
-  console.log(userDataString);
   if (userDataString) {
     const header_template = document.getElementById("header_template");
     header_template.innerHTML = `
@@ -92,11 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
 </header>
 <!-- End Header -->
   `;
-    // Parse the JSON string to get the JavaScript object
+
     const userData = JSON.parse(userDataString);
 
-    // Display the user data on the page
-    // console.log(userData);
     const userDataContainer1 = document.getElementsByClassName("Username");
     for (let i = 0; i < userDataContainer1.length; i++) {
       userDataContainer1[i].innerHTML = `${userData.username}`;

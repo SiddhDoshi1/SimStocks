@@ -30,7 +30,6 @@ function openDialog() {
     const dialog = document.getElementById('dialog');
     var currprice=document.getElementById("price").textContent;
     document.getElementById("quantity").value=1;
-    console.log(currprice);
     document.getElementById("calcprice").textContent=currprice;
     dialog.style.display = 'flex';
     document.addEventListener('click', closeDialogOutside);
@@ -52,7 +51,6 @@ function openDialog() {
   function calculator(){
     var finalprice=document.getElementById("price").textContent;
     finalprice=finalprice.substring(2,finalprice.length);
-    console.log(finalprice);
     finalprice=parseFloat(finalprice);
     let quan=document.getElementById("quantity").value;
     quan=parseFloat(quan);
@@ -84,9 +82,7 @@ function openDialog() {
       amount_total = calcprice;
     }
     var balance=document.getElementById("temp").textContent;
-    console.log(balance);
     balance=parseFloat(balance);
-    console.log(balance);
     if(amount_total > balance)
     {
         var ul = document.getElementById("buy_list");
@@ -103,12 +99,8 @@ function openDialog() {
   function confirmBuy() {
     var ul = document.getElementById("buy_list");
     var itemCount = ul.childElementCount;
-    if(itemCount==2)
+    if(itemCount!=2)
     {
-      
-    }
-    else
-    {
-      console.log(1);
       document.getElementById("balance_temp").click();
-    }}
+    }
+  }

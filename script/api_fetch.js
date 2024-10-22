@@ -15,10 +15,8 @@ function fetchStockProfile() {
     document.getElementById('price').innerHTML = ``;
     document.getElementById('show2').innerHTML = ``;
     var stock_fetch1 = document.getElementById("stock_fetch").value;
-    console.log(stock_fetch1);
     var stock_fetch2=stock_fetch1;
     stock_fetch2=stock_fetch2.toUpperCase();
-    console.log(stock_fetch2);
     for (let i = 0; i < products1.length; i++) {
         let companyName = Object.keys(products1[i])[0];
         if (stock_fetch2 === products1[i][companyName]) {

@@ -99,7 +99,6 @@ function buyCalculator() {
   calcprice = finalprice * quan;
   calcprice = calcprice.toFixed(2);
   balance = parseFloat(balance);
-  console.log(balance);
   var balanceCheckInterval = setInterval(function() {
     document.getElementById("firebase_balance_check").click();
     var balance = parseFloat(document.getElementById("balance_temp").textContent);
@@ -124,12 +123,6 @@ function buyCalculator() {
         document.getElementById("buy_calcprice").innerHTML = `$ ${calcprice}`;
     }
   }, 100);
-  // if(balance<calcprice)
-  // {
-  //   var li=document.createElement('li');
-  //   li.textContent="Not Sufficient Balance";
-  //   document.getElementById('buy_list').appendChild(li);
-  // }
 }
 
 function sellCalculator() {
@@ -182,7 +175,7 @@ function confirmBuy() {
       if (!isNaN(balance)) {
           clearInterval(balanceCheckInterval);
           if (totalCost > balance) {
-              console.log("Insufficient balance to buy");
+              alert("Insufficient balance to buy");
               return;
           }
           document.getElementById("balance_temp").click();
@@ -202,28 +195,13 @@ function confirmSell() {
   let quan = document.getElementById("sell_quantity").value;
   document.getElementById("firebase_balance_check").click();
 
-  // var balanceCheckInterval = setInterval(function() {
-  //     var balance = parseFloat(document.getElementById("balance_temp").textContent);
-  //     if (!isNaN(balance)) {
-  //         clearInterval(balanceCheckInterval);
-
-  //         console.log("Sell confirmed");
-  //         console.log("Quantity:", quantity);
-  //         console.log("Total gain:", totalGain);
-
-  //         balance += totalGain;
-  //         updateBalance(balance);
-  //         closeDialog();
-  //     }
-  // }, 100);
-
   var quantityCheckInterval = setInterval(function() {
     document.getElementById("firebase_quantity_check").click();
     var quantity = parseFloat(document.getElementById("firebase_quantity_check").textContent);
     if (!isNaN(quantity)) {
         clearInterval(quantityCheckInterval);
         if (quan > quantity) {
-          console.log("Insufficient quantity to sell");
+          alert("Insufficient quantity to sell");
           return;
         }
 
