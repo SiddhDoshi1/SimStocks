@@ -245,7 +245,6 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-    console.log(app);
     // Firebase database reference
     const database = getDatabase(app);
     
@@ -260,14 +259,11 @@ function displayStockDetails() {
   onValue(stockDetailsRef, (snapshot) => {
     const stockData = snapshot.val();
     user = user.substring(1, user.length - 1);
-    console.log(user);
-    console.log(stockData["users"][user]);
     let total_inv = 0.0;
     total_inv=parseFloat(total_inv);
     for (var val in stockData["users"][user]) {
       if (val === 'balance') break;
       if (stockData["users"][user][val]["quantity"] == 0) continue;
-      console.log(stockData["users"][user][val]);
       var one = parseFloat(stockData["users"][user][val]["calcprice"]);
       var two = (parseFloat(stockData["users"][user][val]["quantity"]));
       total_inv += ((one * two));
@@ -275,15 +271,10 @@ function displayStockDetails() {
     document.getElementById("invested").textContent = `$ ${total_inv.toFixed(2)}`;
     document.getElementById("current").textContent = `$ ${total_inv.toFixed(2)}`;
 
-    // Clear existing rows before adding new ones
-    // table.innerHTML = `<thead><tr><th><b>Stock Name</b></th><th><b>Quantity</b></th><th><b>Average Price</b></th><th><b>Investment</b></th><th><b>Details</b></th></tr></thead><tbody id="stockcontent"></tbody>`;
-
     const stockTableBody = document.getElementById('stockTable');
     for (var val in stockData["users"][user]) {
-      console.log(val);
       if (val === 'balance') break;
       if (stockData["users"][user][val]["quantity"] === 0) continue;
-      console.log(stockData["users"][user][val]);
 
       const newrow = stockTableBody.insertRow();
       newrow.innerHTML = `

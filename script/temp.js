@@ -106,12 +106,11 @@ function sellCalculator() {
 function confirmBuy() {
 
   var balance = document.getElementById("balance_temp").textContent;
-  console.log(balance);
   closeDialog();
 }
 
 function confirmSell() {
   // Your confirmation logic for sell goes here
-  console.log('Sell confirmed');
+  // .log('Sell confirmed');
   closeDialog();
 }

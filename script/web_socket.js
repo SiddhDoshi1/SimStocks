@@ -16,7 +16,7 @@ function market_checker() {
       }
     })
     .catch((error) => {
-      console.error("Error fetching stock profile:", error);
+      alert("Error fetching stock profile:", error);
     });
 }
 
@@ -45,7 +45,7 @@ function lastprice() {
       stock_cords.push(`${data.c}`);
     })
     .catch((error) => {
-      console.error("Error fetching stock profile:", error);
+      alert("Error fetching stock profile:", error);
     });
 }
 
@@ -148,7 +148,6 @@ function graph_loader(type, start, end) {
       });
   } else {
     live = "Not Live";
-    //console.log(123);
     fetch(graph_cords)
       .then((response) => response.json())
       .then((data) => {
@@ -214,20 +213,6 @@ function renderGraph(stock_cords234,type) {
         show: false, // Hide X-axis labels
       },
     },
-    // options: {
-    //     scales: {
-    //         x: {
-    //             display: false // Hide X-axis labels
-    //         }
-    //     }
-    // },
-    // xaxis: {
-    //     dataLabels: {
-    //         enabled:false
-    //     },
-    //     display: false,
-    //     // categories: seriesData.map(point => point.x) // Assuming x-values need to be extracted
-    // },
   }).render().then(()=>{
     let x = document.getElementById(type);  
     // x.style.backgroundColor = "blue";
@@ -237,7 +222,6 @@ function renderGraph(stock_cords234,type) {
 }
 
 function date(datetype) {
-  //console.log(1);
   if (datetype === "Live") {
     graph_loader("Live", start, end);
   } else if (datetype === "1 Month") {
@@ -269,9 +253,4 @@ function date(datetype) {
     start = start.toISOString().substring(0, 10);
     graph_loader("1 Year", start, end);
   }
-}
-
-function change(but)
-{
-  
 }
